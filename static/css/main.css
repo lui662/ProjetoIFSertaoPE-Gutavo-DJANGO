@@ -1,0 +1,298 @@
+/* static/css/main.css */
+
+/* --- 1. Variáveis de Cor e Fontes (Baseado no PicPay) --- */
+:root {
+    --picpay-green: #21C25E;
+    --dark-green: #1daa52; /* Para hovers */
+    --background-light: #F0F3F4; /* Cinza claro das seções */
+    --text-dark: #111111;
+    --text-medium: #555555;
+    --text-light: #777777;
+    --white: #FFFFFF;
+    --border-color: #E6E6E6;
+
+    /* A fonte principal do PicPay é a "Messina Sans", mas Arial é um substituto universal */
+    --font-primary: 'Arial', sans-serif;
+    --font-heading: 'Arial Black', sans-serif; /* Para títulos pesados */
+}
+
+/* --- 2. Estilos Globais --- */
+* {
+    box-sizing: border-box; /* Garante que padding não afete a largura */
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--white);
+    margin: 0;
+    padding: 0;
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    color: var(--text-dark);
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-weight: 900;
+}
+
+h1 { font-size: 48px; line-height: 1.1; }
+h2 { font-size: 36px; line-height: 1.2; }
+h3 { font-size: 24px; }
+
+a {
+    color: var(--picpay-green);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--dark-green);
+}
+
+/* --- 3. Header (Navbar) --- */
+.main-header {
+    background-color: var(--white);
+    padding: 20px 5%;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    z-index: 1000;
+    position: sticky;
+    top: 0;
+}
+
+.main-header .logo {
+    font-size: 26px;
+    font-family: var(--font-heading);
+    color: var(--text-dark);
+    text-decoration: none;
+}
+
+.main-header .logo span {
+    color: var(--picpay-green);
+}
+
+.main-header .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.main-header .nav-links a {
+    color: var(--text-medium);
+    font-weight: bold;
+    font-size: 15px;
+    transition: color 0.2s ease;
+}
+
+.main-header .nav-links a:hover {
+    color: var(--picpay-green);
+    text-decoration: none;
+}
+
+/* Botão principal (Abrir Conta / Sair) */
+.button-primary {
+    background-color: var(--picpay-green);
+    color: var(--white);
+    padding: 12px 24px;
+    border-radius: 25px; /* Botão arredondado */
+    font-weight: bold;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.button-primary:hover {
+    background-color: var(--dark-green);
+    color: var(--white);
+    text-decoration: none;
+}
+
+/* --- 4. Hero Section (Banner Verde) --- */
+.hero-section {
+    background-color: var(--picpay-green);
+    color: var(--white);
+    padding: 80px 5%;
+    text-align: center;
+}
+
+.hero-section h1 {
+    color: var(--white);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* --- 5. Seção de Features (Cards) --- */
+.features-section {
+    background-color: var(--background-light);
+    padding: 60px 5%;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 40px;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.card-item {
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+    width: 100%;
+    max-width: 350px;
+    text-align: left;
+    transition: transform 0.2s ease;
+}
+
+.card-item:hover {
+    transform: translateY(-5px);
+}
+
+.card-item h3 {
+    margin-bottom: 15px;
+}
+
+.card-item ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.card-item ul li {
+    font-size: 16px;
+    color: var(--text-medium);
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 30px; /* Espaço para o "check" */
+}
+
+/* Criamos um "check" verde com CSS */
+.card-item ul li::before {
+    content: '✔'; /* Símbolo de check */
+    color: var(--picpay-green);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 18px;
+}
+
+/* --- 6. Estilo dos Formulários (Login/Cadastro) --- */
+.auth-form-container {
+    max-width: 450px;
+    margin: 50px auto;
+    padding: 40px;
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-color);
+}
+
+.auth-form-container h2 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+/* Removemos o estilo padrão dos parágrafos do form */
+.auth-form-container form p {
+    margin-bottom: 20px;
+}
+
+.auth-form-container form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--text-dark);
+    font-size: 15px;
+}
+
+/* Estilo unificado para inputs e selects */
+.auth-form-container form input[type="text"],
+.auth-form-container form input[type="email"],
+.auth-form-container form input[type="password"],
+.auth-form-container form input[type="number"], /* <-- ESTA É A LINHA CORRIGIDA */
+.auth-form-container form select {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.2s ease;
+}
+
+.auth-form-container form input:focus,
+.auth-form-container form select:focus {
+    border-color: var(--picpay-green);
+    outline: none;
+}
+
+/* Botão do formulário (usa a classe do header) */
+.auth-form-container form .button-primary {
+    width: 100%;
+    padding: 16px;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.auth-form-container .helptext,
+.auth-form-container ul.errorlist {
+    font-size: 13px;
+    color: var(--text-medium);
+    margin-top: -15px; /* Puxa para perto do campo */
+    margin-bottom: 15px;
+}
+
+.auth-form-container ul.errorlist {
+    color: #d9534f; /* Vermelho para erros */
+    list-style: none;
+    padding: 0;
+}
+
+.auth-form-container .auth-switch-link {
+    text-align: center;
+    margin-top: 25px;
+}
+
+/* --- 7. Responsividade --- */
+@media (max-width: 768px) {
+    h1 { font-size: 36px; }
+    h2 { font-size: 28px; }
+
+    .main-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .hero-section {
+        padding: 50px 5%;
+    }
+
+    .card-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card-item {
+        max-width: 100%;
+    }
+
+    .auth-form-container {
+        margin: 20px;
+        padding: 25px;
+    }
+}

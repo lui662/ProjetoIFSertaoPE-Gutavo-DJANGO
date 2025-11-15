@@ -1,0 +1,84 @@
+<!-- core/templates/home.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %} 
+
+{% block title %}Minha Conta - PicPato Banco{% endblock %}
+
+{% block content %}
+
+    <section class="hero-section">
+        <h1>Olá, {{ user.first_name|default:user.username }}. Este é o seu banco.</h1>
+    </section>
+
+    <section class="features-section">
+        
+        <h2 class="section-title">Seu Painel</h2>
+
+        <div class="card-container"> 
+        
+            <!-- CARD DE CONTA -->
+            <div class="card-item">
+                <h3>Sua Conta (RF003 / RF004)</h3>
+                
+                {% if conta %}
+                    <p style="color: var(--text-medium); font-size: 15px; margin-bottom: 10px;">
+                        Agência: <strong>{{ conta.agencia }}</strong> | Conta: <strong>{{ conta.numero_conta }}</strong>
+                    </p>
+                    
+                    <h2 style="color: var(--picpay-green); margin-bottom: 25px; font-size: 32px;">
+                        Saldo: R$ {{ conta.saldo|floatformat:2 }}
+                    </h2>
+                    
+                    <h4 style="font-family: var(--font-primary); font-size: 16px; font-weight: bold; margin-bottom: 15px; border-top: 1px solid var(--border-color); padding-top: 20px;">
+                        Últimas Transações:
+                    </h4>
+                    
+                    {% if transacoes %}
+                        <ul style="font-size: 14px; width: 100%; margin: 0; padding: 0; list-style: none;">
+                            {% for transacao in transacoes %}
+                                <li style="padding-left: 0; display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding-bottom: 8px; margin-bottom: 8px;">
+                                    <span>
+                                        <span style="color: {% if transacao.tipo == 'E' %}var(--picpay-green){% else %}#D9534F{% endif %}; font-weight: bold; margin-right: 8px;">
+                                            {% if transacao.tipo == 'E' %}✔{% else %}✖{% endif %}
+                                        </span>
+                                        {{ transacao.descricao }}
+                                    </span>
+                                    <strong style="color: {% if transacao.tipo == 'E' %}var(--picpay-green){% else %}#D9534F{% endif %}; white-space: nowrap; padding-left: 10px;">
+                                        {% if transacao.tipo == 'E' %}+{% else %}-{% endif %}R$ {{ transacao.valor|floatformat:2 }}
+                                    </strong>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p style="padding-left: 0; color: var(--text-light); font-size: 14px; margin-top: 0;">
+                            Nenhuma transação encontrada.
+                        </p>
+                    {% endif %}
+
+                    <!-- --- ADICIONADO: Link para Ações --- -->
+                    <div style="margin-top: 20px; border-top: 1px solid var(--border-color); padding-top: 20px; display: flex; gap: 10px;">
+                        <a href="{% url 'depositar' %}" class="button-primary" style="padding: 12px 18px; border-radius: 5px; font-size: 14px;">Fazer Depósito</a>
+                        <!-- O link de Transferência virá aqui -->
+                    </div>
+                    <!-- --- FIM do Link --- -->
+
+                {% else %}
+                    <p>Erro: Conta não encontrada.</p>
+                {% endif %}
+            </div>
+
+            <!-- CARD GOLD (O card estático) -->
+            <div class="card-item">
+                <h3>Cartão Gold</h3>
+                <ul>
+                    <li>Cartão sem anuidade</li>
+                    <li>Compras parceladas em até 12x</li>
+                    <li>Benefícios Mastercard Surpreenda</li>
+                </ul>
+            </div>
+
+        </div> 
+    </section>
+
+{% endblock %}

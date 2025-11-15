@@ -1,0 +1,32 @@
+<!-- core/templates/depositar.html -->
+{% extends 'base.html' %}
+
+{% block title %}Depósito - PicPato Banco{% endblock %}
+
+{% block content %}
+
+    <div class="auth-form-container">
+        
+        <form method="post" action="{% url 'depositar' %}">
+            <h2>Realizar Depósito</h2>
+            <p style="text-align: center; color: var(--text-medium); margin-top: -20px; margin-bottom: 25px;">
+                (Este é um depósito simulado. O valor será adicionado ao seu saldo.)
+            </p>
+
+            {% csrf_token %} 
+            
+            <!-- 
+              Voltamos a usar o 'as_p', pois agora o CSS
+              já sabe estilizar o input[type="number"]
+            -->
+            {{ form.as_p }}
+            
+            <button type="submit" class="button-primary">Confirmar Depósito</button>
+        </form>
+
+        <p class="auth-switch-link">
+            <a href="{% url 'home' %}">Cancelar e voltar</a>
+        </p>
+    </div>
+
+{% endblock %}
