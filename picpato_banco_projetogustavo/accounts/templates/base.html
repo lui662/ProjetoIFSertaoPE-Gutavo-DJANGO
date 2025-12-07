@@ -1,0 +1,46 @@
+<!-- core/templates/base.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}PicPato Banco{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+
+    <header class="main-header">
+        <a class="logo" href="{% url 'home' %}">PicPato<span>Banco</span></a>
+        
+        <nav class="nav-links">
+            {% if user.is_authenticated %}
+                <span>Olá, {{ user.username }}</span>
+                <a href="{% url 'logout' %}" class="button-primary">Sair</a>
+            {% else %}
+                <a href="{% url 'login' %}">Login</a>
+                <a href="{% url 'register' %}" class="button-primary">Abrir Conta</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <!-- --- ADICIONADO: Bloco de Mensagens --- -->
+    <!-- Isto vai mostrar as mensagens de "Depósito realizado com sucesso!" -->
+    {% if messages %}
+        <div style="padding: 10px 5%; text-align: center; background-color: #f0f3f4;">
+            {% for message in messages %}
+                <strong class="{% if message.tags == 'success' %}text-success{% else %}text-danger{% endif %}"
+                        style="color: {% if message.tags == 'success' %}var(--picpay-green){% else %}#D9534F{% endif %};">
+                    {{ message }}
+                </strong>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <!-- --- FIM do Bloco de Mensagens --- -->
+
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>

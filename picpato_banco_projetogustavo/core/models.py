@@ -6,7 +6,7 @@ class coreConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'core' 
 
-class transacao(models.Model):
+class Transacao(models.Model):
     
     TIPO_TRANSACAO_CHOICES = [
         ('deposito', 'Depósito'),
@@ -15,7 +15,7 @@ class transacao(models.Model):
     ]
 
     conta_origem = models.ForeignKey(
-        'accounts.contas',
+        'accounts.Conta',
         on_delete=models.CASCADE,
         related_name='transacoes_origem',
         null=True,
@@ -23,12 +23,24 @@ class transacao(models.Model):
     )
 
     conta_destino = models.ForeignKey(
-        'accounts.contas',
+        'accounts.Conta',
         on_delete=models.CASCADE,
         related_name='transacoes_destino',
         null=True,
         blank=True,
     )
+
+    tipo = models.CharField(
+        max_length=20,
+        choices=TIPO_TRANSACAO_CHOICES
+    )
+
+    valor = models.DecimalField(max_digits=10, decimal_places=2)
+    data_hora = models.DateTimeField(auto_now_add=True)
+    descricao = models.CharField(max_length=255, blank=True)
+
+    def __str__(self):
+        return f"{self.get_tipo_display()} - R$ {self.valor} em {self.data_hora.strftime('%Y-%m-%d %H:%M:%S')}"
 
 
     

@@ -5,9 +5,9 @@ from accounts.views.auth.register import register
 from accounts.views.auth.logout import logout
 
 urlpatterns = [
-    path('login', login, name="login"), 
-    path('register', register, name="register"), 
-    path('logout', logout, name="logout")
+    path('login/', login, name="login"), 
+    path('register/', register, name="register"), 
+    path('logout/', logout, name="logout")
 ]
 
 

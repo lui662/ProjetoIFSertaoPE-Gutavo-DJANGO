@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 
-class contas(models.Model):
+class Conta(models.Model):
     
     user = models.OneToOneField(
         'accounts.User',

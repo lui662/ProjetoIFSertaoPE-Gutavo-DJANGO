@@ -1,8 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
 
 
-class transacao(models.Model):
+class Transacao(models.Model):
     
     TIPO_TRANSACAO_CHOICES = [
         ('deposito', 'Depósito'),
@@ -11,7 +10,7 @@ class transacao(models.Model):
     ]
 
     conta_origem = models.ForeignKey(
-        'accounts.contas',
+        'accounts.Conta',
         on_delete=models.CASCADE,
         related_name='transacoes_origem',
         null=True,
@@ -19,7 +18,7 @@ class transacao(models.Model):
     )
 
     conta_destino = models.ForeignKey(
-        'accounts.contas',
+        'accounts.Conta',
         on_delete=models.CASCADE,
         related_name='transacoes_destino',
         null=True,
