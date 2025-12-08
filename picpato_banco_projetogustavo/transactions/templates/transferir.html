@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Depósito - PicPato Banco{% endblock %}
+{% block title %}Transferência - PicPato Banco{% endblock %}
 
 {% block content %}
 
@@ -17,18 +17,14 @@
                ➡ Transferência
             </a>
         </div>
-
-        <form method="post" action="{% url 'depositar' %}">
-            <h2>Realizar Depósito</h2>
-            <p style="text-align: center; color: var(--text-medium); margin-top: -20px; margin-bottom: 25px;">
-                (Este é um depósito simulado. O valor será adicionado ao seu saldo.)
-            </p>
-
+        
+        <form method="post" action="{% url 'transferir' %}">
+            <h2 style="margin-top: 0;">Nova Transferência</h2>
+            
             {% csrf_token %} 
-
             {{ form.as_p }}
             
-            <button type="submit" class="button-primary">Confirmar Depósito</button>
+            <button type="submit" class="button-primary" style="margin-top: 10px;">Confirmar Transferência</button>
         </form>
 
         <p class="auth-switch-link">

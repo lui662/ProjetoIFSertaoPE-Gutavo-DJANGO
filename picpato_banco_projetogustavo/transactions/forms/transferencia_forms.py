@@ -1,30 +1,33 @@
 from django import forms
-from ..models import DepositTransaction
 
-
-class DepositForm(forms.ModelForm):
-
-    class Meta:
-        model = DepositTransaction
-        fields = ['valor']
+class TransferenciaForm(forms.Form): 
+    
+    agencia = forms.CharField(
+        label="Agência de Destino",
+        max_length=10,
+        widget=forms.TextInput(attrs={
+            "class": "form-control",
+            "placeholder": "Ex: 0001",
+        }),
+    )
 
     conta_destino = forms.CharField(
-        label="Conta Destino",
+        label="Conta de Destino (Número)",
         max_length=20,
         widget=forms.TextInput(attrs={
             "class": "form-control",
-            "placeholder": "digite a conta destino",
+            "placeholder": "Ex: 123456",
         }),
     )
 
     valor = forms.DecimalField(
-        label="Valor da Transferência R$",
-        max_digits=10,
+        label="Valor da Transferência (R$)",
+        max_digits=12,
         decimal_places=2,
         min_value=0.01,
         widget=forms.NumberInput(attrs={
             "class": "form-control",
-            "placeholder": "digite o valor da transferência",
+            "placeholder": "Digite o valor",
             "step": "0.01",
             "min": "0.01",
         }),
@@ -36,14 +39,14 @@ class DepositForm(forms.ModelForm):
         required=False,
         widget=forms.TextInput(attrs={
             "class": "form-control",
-            "placeholder": "opcional: digite uma descrição para a transferência",
+            "placeholder": "Opcional: Ex: Pagamento do Aluguel",
         }),
     )
 
     def clean_valor(self):
         valor = self.cleaned_data.get("valor")
+        if valor is None:
+            raise forms.ValidationError("O valor da transferência não pode ser vazio.")
         if valor <= 0:
             raise forms.ValidationError("O valor da transferência deve ser maior que zero.")
-        elif valor is None:
-            raise forms.ValidationError("O valor da transferência não pode ser vazio.")
         return valor

@@ -1,6 +1,9 @@
 from django.urls import path
-from . import views
+from .views.deposito import deposito
+from .views.transferencia import transferencia
+
 
 urlpatterns = [
-    path('depositar/', views.deposito, name='depositar'),
+    path('deposito/', deposito, name='depositar'),
+    path('transferencia/', transferencia, name='transferir'),
 ]
