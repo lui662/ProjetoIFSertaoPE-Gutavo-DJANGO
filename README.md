@@ -74,3 +74,25 @@ Para testar este projeto na sua máquina, siga os passos abaixo:
 
 6.  **Aceda à aplicação:**
     Abra o seu navegador e vá para `http://1227.0.0.1:8000/` (que irá redirecionar para `/register/`).
+
+
+## 🚀 Como Executar as aplicações de testes. 
+
+1.  **Testes unitarios e de integração:**
+    Para executar testes unitarios e de integração, siga os passos abaixo:
+
+    ```bash
+    python manage.py test
+    ```
+
+    Para executar testes de carga, siga os passos abaixo:
+
+    Rode primeiro a aplicação do sistema
+    ```bash
+    python manage.py runserver
+    ```
+    
+    Em outra aba do terminal execute:
+    ```bash
+    locust
+    ```
